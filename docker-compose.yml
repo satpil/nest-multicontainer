@@ -1,0 +1,28 @@
+
+services:
+  api:
+    container_name: blog
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=localhost
+      - REDIS_PORT=6379
+    links:
+      - redis
+    networks:
+      - blogs
+
+  redis:
+    image: 'redis/redis-stack-server:latest'
+    ports:
+      - '6379:6379'
+    networks:
+      - blogs
+networks:
+  blogs:
+    driver: bridge
