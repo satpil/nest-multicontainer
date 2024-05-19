@@ -4,7 +4,7 @@ pipeline {
     environment {
         REGION = 'us-east-1'
         USERNAME = 'AWS'
-        ECR_URL = 'public.ecr.aws/n6e3e7b0/backend'
+        ECR_URL = '097531186751.dkr.ecr.us-east-1.amazonaws.com/backend'
         VERSION = "${BUILD_NUMBER}-${new Date().format("yyyyMMdd-HHmmss")}" // Dynamic version combining build number and timestamp
     }
 
@@ -24,7 +24,7 @@ pipeline {
         // }
         stage('Authenticate to ECR'){
             steps{
-              sh "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n6e3e7b0"
+              sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 097531186751.dkr.ecr.us-east-1.amazonaws.com"
             }
         }
         stage('Push to ECR'){
