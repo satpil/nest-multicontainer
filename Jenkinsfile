@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Push to ECR'){
             steps{
-                sh 'docker compose -d --build'
+                sh 'docker compose --build'
                 sh "docker tag backend:latest ${ECR_URL}/backend:${VERSION}"
                 sh "docker push ${ECR_URL}/backend:${VERSION}"
             }
